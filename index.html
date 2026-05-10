@@ -2584,7 +2584,7 @@ applyOrientation();
       const isFuture = nowAbs < r.absStart;
 
       // Clip the "from" time to now if we are inside the window
-      const clippedStart = isActive ? nowAbs : r.absStart;
+      const clippedStart = isActive ? Math.floor(nowAbs) : r.absStart;
       const remainingMins = r.absEnd - clippedStart;
 
       // Local times (clipped start for active, original for future/past)
