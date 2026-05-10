@@ -2,8 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Study Together — Anish & Venkatesh</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Zonemate</title>
+
+<!-- iOS PWA: full screen, no browser chrome -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Zonemate">
+
+<!-- Theme color for Safari UI -->
+<meta name="theme-color" content="#0a0a0f">
+
+<!-- App icon (Safari will use this for home screen) -->
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%230a0a0f' rx='40'/%3E%3Ccircle cx='90' cy='90' r='62' fill='none' stroke='%230A84FF' stroke-width='6' opacity='0.5'/%3E%3Ccircle cx='90' cy='90' r='62' fill='none' stroke='%23FF9F0A' stroke-width='6' stroke-dasharray='195 195' stroke-dashoffset='97' opacity='0.5'/%3E%3Ccircle cx='90' cy='90' r='8' fill='%23FFD60A'/%3E%3Cline x1='90' y1='90' x2='90' y2='42' stroke='%230A84FF' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='90' y1='90' x2='118' y2='104' stroke='%23FF9F0A' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- Safe area inset support (notch / Dynamic Island) -->
+<style>
+  :root {
+    --sat: env(safe-area-inset-top);
+    --sab: env(safe-area-inset-bottom);
+    --sal: env(safe-area-inset-left);
+    --sar: env(safe-area-inset-right);
+  }
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+</style>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -247,9 +275,9 @@
 
 <div class="app port" id="app">
 
-  <button class="fs-btn" id="fsBtn" title="Toggle portrait / landscape">
+  <!-- <button class="fs-btn" id="fsBtn" title="Toggle portrait / landscape">
     <i class="ti ti-rotate"></i>
-  </button>
+  </button> -->
 
   <div class="clocks" id="clocks">
     <div class="clock-panel an">
@@ -320,6 +348,7 @@
 
 </div>
 
+<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div class="modal-head">
@@ -463,16 +492,17 @@
   }
   setInterval(updateClocks, 1000); updateClocks();
 
-  /* ── ORIENTATION TOGGLE ── */
-  document.getElementById('fsBtn').addEventListener('click', function () {
-    isLand = !isLand;
-    const div = document.getElementById('divider');
-    document.getElementById('app').classList.toggle('land', isLand);
-    document.getElementById('clocks').style.flexDirection = isLand ? 'row' : 'column';
-    div.className = isLand ? 'divider-v' : 'divider-h';
-    this.innerHTML = isLand ? '<i class="ti ti-device-mobile"></i>' : '<i class="ti ti-rotate"></i>';
-  });
+  // /* ── ORIENTATION TOGGLE ── */
+  // document.getElementById('fsBtn').addEventListener('click', function () {
+  //   isLand = !isLand;
+  //   const div = document.getElementById('divider');
+  //   document.getElementById('app').classList.toggle('land', isLand);
+  //   document.getElementById('clocks').style.flexDirection = isLand ? 'row' : 'column';
+  //   div.className = isLand ? 'divider-v' : 'divider-h';
+  //   this.innerHTML = isLand ? '<i class="ti ti-device-mobile"></i>' : '<i class="ti ti-rotate"></i>';
+  // });
 
+ 
   /* ── DATE SCROLL ── */
   function buildDateScroll(cls) {
     const ds = document.getElementById('dateScroll');
@@ -775,4 +805,4 @@
   renderSlots();
 </script>
 </body>
-</html> 
+</html>
