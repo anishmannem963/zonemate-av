@@ -14,8 +14,7 @@
 <meta name="theme-color" content="#0a0a0f">
 
 <!-- App icon (Safari will use this for home screen) -->
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%230a0a0f' rx='40'/%3E%3Ccircle cx='90' cy='90' r='62' fill='none' stroke='%230A84FF' stroke-width='6' opacity='0.5'/%3E%3Ccircle cx='90' cy='90' r='62' fill='none' stroke='%23FF9F0A' stroke-width='6' stroke-dasharray='195 195' stroke-dashoffset='97' opacity='0.5'/%3E%3Ccircle cx='90' cy='90' r='8' fill='%23FFD60A'/%3E%3Cline x1='90' y1='90' x2='90' y2='42' stroke='%230A84FF' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='90' y1='90' x2='118' y2='104' stroke='%23FF9F0A' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
-
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <!-- Safe area inset support (notch / Dynamic Island) -->
 <style>
   :root {
@@ -60,6 +59,7 @@
     background: rgba(255,255,255,0.1); border: 0.5px solid rgba(255,255,255,0.22);
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; color: #fff; font-size: 16px; transition: background .2s;
+    display: none;
   }
   .fs-btn:hover { background: rgba(255,255,255,0.18); }
 
@@ -491,6 +491,23 @@
     });
   }
   setInterval(updateClocks, 1000); updateClocks();
+
+function applyOrientation() {
+  const isLandscape = window.innerWidth > window.innerHeight;
+  const app = document.getElementById('app');
+  const div = document.getElementById('divider');
+  if (isLandscape) {
+    app.classList.add('land');
+    document.getElementById('clocks').style.flexDirection = 'row';
+    div.className = 'divider-v';
+  } else {
+    app.classList.remove('land');
+    document.getElementById('clocks').style.flexDirection = 'column';
+    div.className = 'divider-h';
+  }
+}
+window.addEventListener('resize', applyOrientation);
+applyOrientation();
 
   // /* ── ORIENTATION TOGGLE ── */
   // document.getElementById('fsBtn').addEventListener('click', function () {
